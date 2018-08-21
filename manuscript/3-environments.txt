@@ -1,48 +1,48 @@
-# 3. Environments
+# 3. Окружения
 
-Having multiple environments for your application is essential for quality. Each environment serve a certain purpose and represents a state of your application in some way. When I talk about an environment I mean in which your application lives, that could be separate servers or virtual machines. Having multiple environments running on one machine is not an issue if they are separated but they must be it in some way to prevent them from interfering with eachother. If two of your environments are sharing the same database or cache, you could end up with unexpected results and even create bugs that didn't exist in the first place.
+Наличие нескольких окружений для вашего приложения имеет важное значение для качества. Каждое окружение служит определенной цели и тем или иным образом представляет состояние вашего приложения. Когда я говорю об окружении, я имею в виду, где работает ваше приложение — это могут быть отдельные серверы или виртуальные машины. Наличие нескольких окружений, работающих на одном компьютере, не является проблемой, если они разделены, но они не должны в некотором смысле взаимодействовать друг с другом. Если два из ваших окружений используют одну и ту же базу данных или кеширование, вы можете получить неожиданные результаты и даже допустить баги, которых не было с самого начала.
 
-## 3.1 Repeatable
+## 3.1 Повторяемость
 
-Being told you're a "broken record" isn't fun but for your environments it's the best thing you could say. The most important thing to strive for with your environments is that they always have the same setup where operating system and software should be of the same version and have the same configuration. And in a best case scenario they are **repeatable through automation**.
+Когда вам говорят, что у вас «сломанная запись», это не весело, но для вашего окружения это лучшее, что можно было сказать. Самое главное, к чему нужно стремиться в ваших окружениях, — это чтобы они всегда имели одну и ту же настройку, в которой операционная система и программное обеспечение используют одинаковую версию и конфигурацию. И в лучшем случае, это когда они **воспроизводимы с помощью автоматизации**.
 
-Many times have I encountered unexpected behaviour because of environments differing from each other. Some operating systems, CentOS for example, treat file names case sensitive while others like Ubuntu treat them case insensitive. This could end up with files not being read into your application. Another good example is how JSON is encoded/decoded; some environments will encode `0` to `"0"`. If your application is expecting an integer and will get a string then things can go wrong.
+Много раз я сталкивался с неожиданным поведением из-за того, что окружения отличались друг от друга. Некоторые операционные системы, например, CentOS, рассматривают имена файлов с учетом регистра, в то время как другие, такие как Ubuntu, относятся к ним без учета регистра. Это может привести к тому, что файлы не будут прочитаны в вашем приложении. Другой показательный пример — как кодируется/декодируется JSON; некоторые окружения будут кодировать `0` в `"0"` (строчный ноль). Если ваше приложение ожидает целое число, а получит вместо этого строку, то все может пойти не так.
 
-Knowing that your application will behave the same in your various environments is great because then you do not have to think about it. *Removing uncertainty* is important for gaining confidence in your deployment process.
+Зная, что ваше приложение будет вести себя одинаково в различных окружениях, это здорово, потому что тогда вам не нужно об этом думать. *Устранение неопределенности* важно для получения уверенности в процессе деплоя.
 
-### Server provisioning
+### Подготовка сервера
 
-I said before that this topic is outside the scope of this book but I still want to touch briefly on it. If you want to achieve repeatability in your environments to the point where all your environments are all the same: you need it. Server provisioning is automating your environments. Say you're firing up a new virtual instance or installing a new server, what are your next steps? Often they are:
+Я уже говорил, что эта тема выходит за рамки книги, но я все же хочу коснуться ее кратко. Если вы хотите добиться повторяемости в вашем окружении до такой степени, что все ваши окружения одинаковы — вам нужно это. Подготовка сервера автоматизирует вашу среду. Предположим, что вы запускаете новый виртуальный экземпляр или устанавливаете новый сервер, каковы ваши дальнейшие действия? Часто они такие:
 
-* Install software
-* Set configuration values for the software
-* Set up a service or application
-* Configure the service or application
-* Serve the service or application
+* Установить программное обеспечение
+* Установить значения конфигурации для программного обеспечения
+* Настроить сервис или приложение
+* Настроить сервис или приложение
+* Запустить сервис или приложение
 
-If you do this manually you will inevitably loose control of how to repeat it. Making sure that correct values are set in `php.ini` across all servers will never be maintainable if done in a manual fashion. The more environments you have, the tougher it will become. Need to update the file size upload limit on 78 server instances? Have fun. Perhaps get an intern.
+Если вы сделаете это вручную, вы неизбежно потеряете контроль над тем, как его повторить в будущем. Убедившись в том, что правильные значения установлены в `php.ini` на всех серверах, они никогда не будут находится в поддерживаемом состоянии, пока это будет делаться вручную. Чем больше у вас окружений, тем труднее их поддерживать. Необходимо обновить ограничение на загрузку размера файла на 78 экземплярах сервера? Повеселись. Возможно, поручите это стажеру.
 
-There are a number of tools for server provisioning. The current most popular ones are [Chef](https://www.getchef.com/), [Puppet](http://puppetlabs.com/) and [Ansible](http://www.ansible.com/). The latter have gained a lot of traction lately. I suggest you read up on them and take a look at what problems they try to solve and how they solve them. They can help you with taking your deployment process to the next level.
+Существует несколько инструментов для автоматической настройки сервера. Наиболее популярными из них являются [Chef](https://www.getchef.com/), [Puppet](http://puppetlabs.com/) и [Ansible](http://www.ansible.com/). Последний недавно приобрел притягательную силу. Я предлагаю вам ознакомиться со всеми ними и посмотреть, какие проблемы они пытаются решить и как они это делают. Они могут помочь вам перейти на следующий уровень деплоя.
 
-## 3.2 Configuration / environment variables
+## 3.2 Конфигурация / переменные окружения
 
-An important aspect of environments is configuring your application for the environment it's running in. Separation of code and configuration is a part of the [twelve-factor app](http://12factor.net/config) and it explains the importance of this separation as:
+Важным аспектом окружений является конфигурация вашего приложения для окружения, в котором оно работает. Разделение кода и конфигурации является частью [12-факторного приложения](https://12factor.net/ru/config), и это объясняет важность этого разделение как:
 
-> Apps sometimes store config as constants in the code. This is a violation of twelve-factor, which requires strict separation of config from code. Config varies substantially across deploys, code does not.
+> Иногда приложения хранят конфигурации как константы в коде. Это нарушение методологии двенадцати факторов, которая требует строгого разделения конфигурации и кода. Конфигурация может существенно различаться между деплоями, код не должен различаться.
 
-The distinction between code and configuration is important since your application should be able to run  without depending on configuration in your repository. They state a simple but powerful question to this, which is *can you at any given time open source your application without compromising any credentials?* If you could in theory do this you have a strict separation of code and configuration and I'll show you how to do this with a simple and great tool called *PHP dotenv*.
+Различие между кодом и конфигурацией важно, так как ваше приложение должно работать независимо от конфигурации в вашем репозитории. Они выражают простой, но мощный вопрос к этому, которой состоит в следующем — *можете ли вы в любой момент времени открыть исходный код приложения, не компрометируя при этом какие-либо учётные данные?* Если бы вы могли теоретически сделать это, у вас будет строгое разделение кода и конфигурации, и я покажу вы, как сделать это с помощью простого и удобного инструмента под названием *PHP dotenv*.
 
-The goal is to supply your application with configuration that is outside of the repository and this could be any important hostnames or credentials for database connections, cache connections or third party services such as *S3*, *IronMQ* or *MailChimp*.
+Цель состоит в том, чтобы предоставить вашему приложению конфигурацию, которая находится за пределами репозитория, и это могут быть любые важные имена хостов или учетные данные для подключений к базе данных, кешированию или к сторонним сервисам, таким как *S3*, *IronMQ* или *MailChimp*.
 
 ### PHP dotenv
 
-This tool is probably all you need for your configuration requirements, it's  simple yet powerful. It does not require you to edit any virtual hosts in Nginx or Apache nor add or modify any PHP configuration values. All you do is create a file with variables in a key/value manner and it populates the global variables `$_ENV` and `$_SERVER` for you and also makes them accessible via the [`getenv()`](http://php.net/manual/en/function.getenv.php) function.
+Этот инструмент, вероятно, все, что вам нужно для удовлетворения ваших требований конфигурации, он простой, но мощный. Он не требует от вас редактирования каких-либо виртуальных хостов в nginx или Apache, а также добавления или изменения значения конфигурации PHP. Всё, что вам требуется сделать — это создать файл с переменными вида ключ-значение, и он заполняет глобальные переменные `$ _ENV` и `$ _SERVER`, а также делает их доступными через функцию [`getenv()`](http://php.net/manual/ru/function.getenv.php).
 
-Installation is done through Composer:
+Установка осуществляется через Composer:
 
     composer require vlucas/phpdotenv
 
-Then you need to bootstrap the configuration loading. In this example we pass `__DIR__` to it which tries to locate the configuration file in the same directory as the executed file, but this could be replaced with any directory you want to store your configuration file in:
+Затем вам нужно настроить загрузку конфигурации. В этом примере мы передаем ему `__DIR__`, который пытается найти файл конфигурации в том же каталоге, что и исполняемый файл, но это может быть любым каталогом, в котором хотите хранить файл с конфигурацией:
 
 {lang="php"}
 ~~~
@@ -50,7 +50,7 @@ $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 ~~~
 
-After this we create a file called `.env` in the directory we supplied and for the sake of an example we add our database configurations to it:
+После этого мы создаем файл с именем `.env` в каталоге, который мы указали, и для примера добавим туда нашу конфигурацию базы данных:
 
 ~~~
 DATABASE_HOST=localhost
@@ -58,7 +58,7 @@ DATABASE_USERNAME=user
 DATABASE_PASSWORD=password
 ~~~
 
-We can now access these configuration values in our application and all three of these return *localhost*:
+Теперь мы можем получить доступ к этим значениям конфигурации из нашего приложении, в данном случае показано три одинаковых примера, которые вернут *localhost*:
 
 {lang="php"}
 ~~~
@@ -67,47 +67,47 @@ $databaseHost = $_ENV['DATABASE_HOST'];
 $databaseHost = $_SERVER['DATABASE_HOST'];
 ~~~
 
-I recommend using `getenv()` or even better writing a wrapper function that allows you to pass a default value if the configuration value isn't set (inspired by Laravel's [env()](https://github.com/laravel/framework/blob/a1dc78820d2dbf207dbdf0f7075f17f7021c4ee8/src/Illuminate/Foundation/helpers.php#L626) function).
+Я рекомендую использовать `getenv()` или даже лучше написать функцию-обёртку, которая позволяет передавать значение по умолчанию, если значение конфигурации отсутствует (вдохновлено [env()](https://github.com/laravel/framework/blob/a1dc78820d2dbf207dbdf0f7075f17f7021c4ee8/src/Illuminate/Foundation/helpers.php#L626) у Laravel).
 
 {lang="php"}
 <<(code/chapter-3/env-function.php)
 
-This allows you to fetch a configuration value or get a default value
+Эта функция позволяет получить значение конфигурации или значение по умолчанию при его отсутствии
 
 {lang="php"}
 ```
 $databaseHost = env('DATABASE_HOST', 'localhost');
 ```
 
-Make sure your configuration file is ignored in your repository so it doesn't get committed. Remember the part where you should be able to, at least in theory, open source your application without compromising any credentials.
+Убедитесь, что ваш файл конфигурации игнорируется в вашем репозитории, так чтобы не было даже коммита этого файла. Помните ту часть, где у вас, по крайней мере теоретически, должна быть возможность открыть приложение с открытым исходным кодом, не раскрывая какие-либо учётные данные.
 
-I> ### Example configuration file
+I> ### Пример конфигурационного файла
 I>
-I> For reference and easy setup create an example configuration file that you can copy and replace the values from. Create `.env.example` that contains all necessary keys you need for your application.
+I> Для ознакомления и простой настройки создайте пример файла конфигурации, который вы можете скопировать и заменить нужные значения. Создайте `.env.example`, который будет содержать все необходимые ключи, необходимые для работы приложения.
 
-## 3.3 Local environment
+## 3.3 Локальное окружение
 
-Having a local development environment is something you should strive for. With local I mean on your actual computer, not on a centralized server somewhere you access through a VPN service or similar. Being able to work on your code anywhere without an internet connection is nice.
+Наличие локального окружения разработки — это то, чего следует вам добиваться. Под этим я имею в виду приложение, работающее на вашем фактическом компьютере, а не на централизованном сервере, куда вы получаете доступ через VPN-сервис или что-то подобное. Приятно работать с кодом в любом месте без подключения к интернету.
 
-I always run my local development environment in a virtual machine with [Vagrant](http://www.vagrantup.com). This allows me to go haywire with everything and if I fuck up the environment badly enough I just destroy the virtual machine and provision it from scratch. It's great for testing things in your environment without having to worry about breaking something on your computer or for someone else. Want to test your application in a different PHP version for example? Install, test, reset.
+Я всегда разворачиваю локальное окружение разработки на виртуальной машине с помощью [Vagrant](http://www.vagrantup.com). Это позволяет мне делать всё, что угодно с приложением, и если я испорчу окружение достаточно сильно, я просто уничтожу виртуальную машину и подготовлю ее с нуля. Это отлично подходит для тестирования кода в вашем окружении, не беспокоясь о том, чтобы что-то сломать на вашем компьютере или чьём-либо ещё. Например, хотите протестировать свое приложение в другой версии PHP? Установите, протестируйте, сбросьте окружение.
 
-The main point is that you want to be able to work on your application whenever. With a local environment you can work on a flight across the atlantic and push/pull changes as soon as you get a connection to the internet. If you end up in a situation where you are dependent on an internet connection to work you'll curse yourself when you don't have one.
+Главное, что вы хотите иметь возможность работать с вашим приложением в любой момент. В локальном окружении вы можете работать в самолете, пролетая через Атлантический океан, и выполняя команды push/pull, как только подключитесь к Интернету. Если вы окажетесь в ситуации, когда вы зависите от интернет-соединения, вы проклинаете себя, когда у вас его нет.
 
-Having your local environment repeatable is the number one tool for introducing new team members to your code. Imagine you start at a new job and all you do it `git clone <insert vagrant repository here>` and then a `vagrant up` and you're all set. Sounds like a dream doesn't it? Usually time is invested in writing documentation for setting up a local environment and that documentation is more than often outdated and no one really wants to take responsibility for keeping it updated.
+Воспроизводимость вашего локального окружения — это самый главный инструмент для внедрения новых членов команды в ваш код. Представьте, что вы начинаете с нового задачи, и все, что вы делаете, это выполняете команду `git clone <ваш vagrant-репозиторий>`, а затем `vagrant up`, и вы готовы к работе. Похоже на сон, не так ли? Обычно время тратится на документацию по настройке локального окружения, и эта документация во многом устарела, и никто не хочет брать на себя ответственность за ее обновление.
 
-## 3.4 Development environment
+## 3.4 Окружение разработки
 
-The name of this one can be somewhat misleading. No development work should be done here but the name comes from the branching strategy in [chapter 6 on Version Control](#chapter-version-control). This is a common ground for features and bug fixes where all code that should be shared and tested by others will end up here. The first step after finishing something in your local environment will most often be to merge it to your main branch and push it to the development environment.
+Название этого окружения может быть несколько обманчивым и вводить в заблуждение. Здесь не следует ничего разрабатывать, а название происходит из стратегии ветвления, обсуждаемой в [шестой главе «Управление версиями»](#chapter-version-control). Это общая площадка для нового функционала и исправления багов, где весь код, который должен быть общим и может проверен другими, в конечном итоге окажется здесь. Первым шагом после завершения работы над чем-либо в вашем локальном окружении будет, как правило, слияние кода в основную ветку и перенос его в окружение разработки.
 
-It's a great place for early testing by yourself and your team. Getting an extra set of eyes on something early on can be a great quality tool. Code reviews should be performed before something is merged and pushed to this environment since it's a very effective tool for quality, knowledge sharing and stomping out some obvious errors. All developers will have certain domain knowledge and someone else could perhaps tell right away if your code won't work with a specific part of the domain.
+Это отличное место для раннего тестирования вами и вашей командой. Дополнительная пара глаз на что-либо на раннем стадии может стать отличным инструментом качества. Просмотр кода (он же код ревью) должен быть выполнен до того, как что-то будет объединено и перенесено в это окружение, поскольку это очень эффективный инструмент для обеспечения качества, обмена знаниями и устранения некоторых очевидных ошибок. Все разработчики будут обладать определенными знаниями о предметной области, а кто-то еще может сразу определить, почему ваш код не будет работать с определенной частью приложения.
 
-## 3.5 Staging environment
+## 3.5 Промежуточное окружение
 
-Your staging environment is very important and it should to the fullest extent possible duplicate your production environment. This is where you do your final testing of your code before you push it to production and serve your application to the users.
+Ваше промежуточное (staging) окружение очень важно, и оно должно в максимально возможной степени дублировать ваше продашен-окружение. Именно здесь вы проводите окончательное тестирование своего кода, прежде чем отправляете его в продакшен и приложение дойдёт до пользователей.
 
-With duplicate to the fullest extent I do not mean that it should connect to the production database for example. Having a database that gets updated with a production dump every 24 hours is good enough. Does your application have multiple database instances and perhaps connect to a cache cluster? The staging environment will need that as well. Is the application running on multiple nodes behind a load balancer? Set up your staging environment in the same say. Remember, **as close to the production environment as possible**.
+Под дубликатом в полной мере я не имею в виду, что он должен подключаться к базе данных на продакшен-сервер, например. Наличие базы данных, которая обновляется в соответствии с базой данной на продакшене каждые 24 часа, достаточно хорошая идея. Имеет ли ваше приложение несколько экземпляров базы данных и, возможно, подключается к кластеру кеша? Это промежуточное окружение также понадобится. Приложение запущено на нескольких узлах за балансировщиком нагрузки? Настройте свою промежуточную среду подобным образом. Помните, **нужно быть как можно ближе к продакшен-окружению**.
 
-Being able to test against production data is sometimes necessary but be extremely careful when doing this for obvious reasons. Make sure you do not test features that for example could end up e-mailing users. Your staging environment should perhaps only allow outgoing e-mail to certain addresses that belongs to people in your team or in your company. Here is a simple example that logs the e-mail if it's not in production:
+Возможность тестирования продакшен-данные иногда необходимо, но будьте предельно осторожны, когда делаете это по понятным причинам. Убедитесь, что вы не тестируете функционал, работа которая может привести к отправке электронной почты пользователям. Ваше промежуточное окружение должно, скорее всего, разрешать только исходящую электронную почту на определенные электронные адреса, принадлежащие сотрудникам вашей команды или компании. Вот простой пример, который разрешает логирование электронной почты, если приложение не находится в продакшен-окружении:
 
 {lang=php}
 ~~~
@@ -115,9 +115,9 @@ function sendEmail ($to, $from, $subject, $message) {
 	$productionEnvironment = (getenv('ENVIRONMENT') === 'production');
 	$internalEmail = (strstr($to, '@yourapplication.com') !== false);
 
-	if (!$productionEnvironemnt && !$internalEmail) {
+	if (!$productionEnvironment && !$internalEmail) {
 		$log = sprintf(
-			'Sending "%s" e-mail to %s from %s',
+			'Отправка "%s" электронной почты на %s с %s',
 			$subject,
 			$to,
 			$from
@@ -134,33 +134,33 @@ function sendEmail ($to, $from, $subject, $message) {
 }
 ~~~
 
-## 3.6 Production environment
+## 3.6 Продакшен-окружение
 
-This one is quiet obvious and it's the server(s) serving your application to your end users. Whether it's one server or multiple ones behind load balancer; this is the endpoint for your users.
+Это очевидно, и это сервер обслуживает ваше приложение для ваших конечных пользователей. Будь то один сервер или несколько серверов, находящихся за балансировщиком нагрузки; это конечная точка для ваших пользователей.
 
-It will contain an as stable as possible code base with code that is extensively tested and as bug free as possible. What is to be said here is that **it's for this environment we need a great deployment process**. All the effort we put in to the process will reflect on the quality and stability of your production environment.
+Он будет содержать как можно более стабильную кодовую базу с хорошо протестированным кодом и максимально свободен от ошибок. Что нужно сказать здесь, так это то, что **для этого окружения нам нужен отличный процесс деплоя**. Все усилия, которые мы вкладываем в этот процесс, отразятся на качестве и стабильности вашего продакшен-окружения.
 
-## 3.7 Testing environment(s)
+## 3.7 Тестовое окружение
 
-Having one or multiple test environments is not obligatory but it is something that can bring a lot of benefits for your application. Depending on the size of your application it will make testing a lot easier. If you are able to set up test environment for specific branches for example, you can easily give access to testers for feature branches.
+Наличие одной или нескольких тестовых окружений не обязательно, но это может принести много преимуществ для вашего приложения. В зависимости от размера вашего приложения, тестирование будет намного проще. Если вы, например, можете настроить тестовое окружение для определенных веток, вы можете легко предоставить доступ для тестировщиков к веткам с определенным функционалом.
 
-There are a few things that are essential for having success with test environments: speed and repeatability. If you can without major effort set up a test environment and check out a certain branch, your testing possibilities will increase dramatically. When I say speed I would consider 30 minutes or less a reasonable amount of time. Longer than that and you can start to experience too big discrepancies in development speed and test environment speed. Also If you're not able to update your test environment with the latest changes it will hardly be worth your time. The loop here is to get quick feedback on your code and react to it. Fix the code, push to the test environment again and then get new feedback.
+Есть кое-что важное для успеха с тестовыми окружениями: скорость и воспроизводимость. Если вы можете без особых усилий создать тестовое окружение и проверить определенную ветку, ваши возможности тестирования резко возрастут. Когда я говорю про скорость, я бы рассмотрел 30 минут или меньше в качестве достаточного количества времени. Больше этого времени, и вы можете начать испытывать слишком большие расхождения в скорости разработки и тестового окружения. Кроме того, если вы не можете обновить тестовое окружение в соответствии с последними изменениями, вряд ли это будет стоить вашего времени. Основной посыл здесь — получить быструю обратную связь по вашему коду и отреагировать на него. Исправьте код, снова отправьте изменения на тестовое окружение, а затем получите новую обратную связь.
 
-## 3.8 Simplify server access
+## 3.8 Упрощение доступа к серверу
 
-In the process of managing multiple servers you end up wanting to make access to them faster and easier. First of all creating host entries for your various servers will remove the need of looking up IP addresses. For some servers you won't need it since they will be publicly accessible through domains such as your production environment. But even for your production environment you might have servers for databases, load balancers, caches, etc and they might not be accessible through a public domain. But you will still need to access them on a regular basis for maintenance and debugging so create host entries for them.
+В процессе управления несколькими серверами, вы в конечном итоге захотите сделать доступ к ним быстрее и проще. Прежде всего, создание записей хоста для ваших различных серверов устранит необходимость поиска IP-адресов. Для некоторых серверов вам это не понадобится, поскольку они будут доступны публично через такие домены, как ваше продакшен-окружение. Но даже для вашей продакшен-окружения у вас могут быть серверы для баз данных, балансировки нагрузки, кеширования и т.д., и они могут быть недоступны через общедоступный домен. Но вам все равно придется обращаться к ним на регулярной основе для обслуживания и отладки, поэтому создайте записи хоста для них.
 
-The second thing is setting up and maintaining your SSH configuration file. In this you can manage hosts, hostnames, keys, ports and everything else you need to simplify your access to the servers. Compare these commands and you'll realize that you can gain a lot by this:
+Во-вторых, это настройка и поддержка вашего конфигурационного файла SSH. В нём вы можете управлять хостами, именами хостов, ключами, портами и всем остальным, что необходимо для упрощения доступа к серверам. Сравните эти команды, и вы поймете, что вы можете многое получить благодаря использованию подобного файла:
 
 ```
 ssh -i ~/.ssh/myapp-staging.key staging@123.123.1.9 -p 2223
 
-# instead when using configuration file:
+# вместо этого при использовании файла конфигурации:
 
 ssh myapp-staging
 ```
 
-All we need for this is to create `~/.ssh/config` and add our configuration for our environments there. For the previous example it could look like this, with host entries added and expanded for covering multiple environments:
+Все, что нам нужно, это создать `~/.ssh/config` и добавить нашу конфигурацию для нашего окружения. В предыдущем примере это может выглядеть следующим образом: записи хоста добавляются и расширяются для охвата нескольких окружений:
 
 ```
 Host myapp-staging
@@ -188,4 +188,4 @@ Host myapp-production-db
     IdentityFile ~/.ssh/myapp-production.key
 ```
 
-As you can see, multiple hosts can be defined and you can create one for each of your servers that you manage often. This will save you lots of time in accessing the servers. There are even more cool stuff you can do with it such as specifying wild card hosts and more. You can do some further reading on the [man page for ssh_config](https://www.freebsd.org/cgi/man.cgi?query=ssh_config&sektion=5).
+Как вы можете видеть, можно определить несколько хостов, и вы можете создать по одному для каждого из ваших серверов, которыми вы часто управляете. Это позволит вам сэкономить много времени на доступе к серверам. Есть еще много классных примочек, которые вы можете сделать здесь, например, указание хостов с использованием метасимволов и многое другое. Вы можете продолжить чтение [справочного руководства по ssh_config](https://www.freebsd.org/cgi/man.cgi?query=ssh_config&sektion=5).
