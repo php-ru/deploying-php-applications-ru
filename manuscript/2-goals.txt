@@ -1,130 +1,130 @@
-# 2. Goals {#chapter-goals}
+# 2. Цели {#chapter-goals}
 
-I really hope you have decided that you want to improve your deployment process. Well, that is probably why you're reading this book at this moment. You should at this point probably establish a few things. Ask yourself the questions of where you currently are, and where you would like to be. These are essential questions in reaching goals, between here and there you should probably set a few milestones as well since sensing that you achieve something is always important. This is starting to sound like a self help book, but I'm of course talking about where your deployment process is and where you would like it to be.
+Я очень надеюсь, что вы решили, что хотите улучшить процесс деплоя. Возможно, именно поэтому вы читаете эту книгу в данный момент. Вам стоит сейчас, вероятно, определить несколько моментов. Прямо сейчас задайте себе вопросы, в каком положении ваши дела, и что вы бы хотели изменить. Это основополагающие вопросы для достижения целей — между тем, где вы сейчас находитесь и там, где, наверное, назначили себе несколько целей; так же всегда важно чувствовать то, что вы чего-то достигли. Это начинает казаться вроде книги самопомощи, но я, конечно, говорю о том, какой сейчас у вас процесс деплоя и каким вы хотите его видеть.
 
-We have a few things we need to go through before we get to the actual list of goals. Understanding the background of the various parts will help you better grok the big picture.
+У нас есть кое-что, с чем нам нужно разобраться, прежде чем мы перейдём к фактическому списку целей. Понимание причин различных частей поможет вам лучше видеть общую картину происходящего.
 
-## 2.1 How it usually begins
+## 2.1 Как обычно это начинается
 
-Take a deep breath and imagine a peaceful lake in your mind. No just kidding, stop with that. This is still not a self help book.
+Сделайте глубокий вдох и представьте себе тихое озеро в вашем сознании. Нет, я просто шучу, перестаньте это делать. Это пока не книга из серии «помоги себе сам».
 
-Since the deployment process is just like any other process in the software development cycle it will mature in certain ways. It usually starts at a fairly similar place. This place has seen a lot of developers and it will continue to see a lot of other developers pass by. What I want is to show people what kind of place that is and why you should try to avoid going there. The main reason that place is bad is that it's **at the end** of everything. I realize that I just said that the beginning is at the end, but let me explain what I mean before you call me an idiot.
+Поскольку процесс деплоя подобен любому другому процессу в цикле разработки программного обеспечения, он будет созревать определённым образом. Обычно он начинается в примерно похожем месте. В этом месте много разработчиков, и он будет продолжать наблюдать, как многие другие разработчики проходят мимо. Я хочу показать людям, что это за место и почему вам следует стараться избегать его. Основная причина, по которой это место плохое, — это то, что *по окончанию* всему конец. Я понимаю, что я только что сказал, что начало в конце, но позвольте мне объяснить, что я имею в виду, прежде чем вы назовёте меня идиотом.
 
-An application usually starts with an idea. Then some wireframes (either mental or actual ones). Then perhaps some design and of course some code. Then the first beta is ready for release. Wow that was fast, but anyway. Success, get the minimum viable product out there! This is where people stop and think "Oh right, we need some kind of hosting", someone with a credit cards pays for the hosting and a developer is tasked with deploying the code to it. Of course that's not a problem for the developer, but usually not much thought will be put into this part. No deployment tools will be used, no automation is put into place. I'm not saying this is the case for all project, but it's a fairly good estimation for most projects.
+Обычно приложение начинается с идеи. Затем кое-какое отображение идеи (как в уме, так и в реальности). Тогда, возможно, какой-то дизайн и, конечно, определённый код. После чего первая бета-версия готова к выпуску. Ничего себе, это было быстро, ну да ладно. Вот успех, вы получили минимальный жизнеспособный продукт! На этом этапе люди останавливаются и думают: «Ах да, нам нужен какой-то хостинг», и вот кто-то с кредитными картами оплачивает его, а разработчику поручается задеплоить туда код. Конечно, это не проблема для разработчика, но, как правило, на эту часть не будет акцентировано много внимания. Инструменты для деплоя использоваться не будут и ни о какой автоматизации не может быть и речи. Я не говорю, что это касается всего проекта, но это довольно часто встречается у большинства проектов.
 
-Do you see the issue at hand here? **Deployment is in most cases an after thought**. It's something many feel they just have to do and most wouldn't get out of bed earlier on a Monday because they are so eager to set up a sexy deployment process. Usually this will be a "fix things as you go" kind of process with quick and dirty fixes, duct taping that shit if it's necessary. This is something I usually refer to as *duct tape deployment*, and yes you can quote me on that. This is more than often a one man or one woman show and if someone else would like to deploy they wouldn't be able to. They would first have to ask the "one man/woman deploy army" as to how it's done, what the passwords are, which paths are used, where the database is and everything else that comes with it. Efficient? No. Sustainable? No.
+Вы видите проблему здесь? **Деплой в большинстве случаев — последнее, о чём думают люди**. Про него многие считают, что им просто нужно просто это сделать, и большинство из них не встанут с постели раньше понедельника, потому что они так сильно захотелось создать великолепный процесс деплоя. Обычно вместо этого будет «исправить это по ходу работы», процесс с быстрыми и грязными исправлениями. Это то, что я обычно называю *деплоем клейкой ленты* (*duct tape deployment*), и да, вы можете процитировать меня в этом. Это больше чем, чаще думают, что мужчина или женщина, или кто-то ещё захочет задеплоить, но они не смогут. Сначала им нужно будет спросить «армию из одного мужчины или женщины, которые делали деплой» относительно того, как это делается, узнать пароли, какие пути доступа используются, где находится база данных, и все остальное, что нужно для деплоя. Эффективно? Нет. Жизнеспособно? Нет.
 
-What we need to start with is making the deployment an important part in our applications' lives. It should be there for our application as a supporting and nurturing parent. Would you let your kid go to the first day of school without you being there? Of course not. The school system in the United States is very fond of the *No Child Left Behind Act* and I would like to propose a *No Application Left Behind Act* where no applications is left behind because of a bad deployment process. It might be a bad analogy, since they have a really crappy education system in the United States. But I hope I got my point across anyway.
+Нам нужно начать с того, чтобы деплой стал важной частью работы наших приложений. Он должен быть для нашего приложения как поддерживающий и воспитывающий родитель. Вы позволили бы вашему ребёнку отправиться в первый день учёбы без вас? Конечно нет. Школьной системе в Америке очень нравится закон под названием *No Child Left Behind Act* (*Ни одного отстающего ребёнка*), и я хотел бы предложить похожее — *No Application Left Behind Act*, то есть своего рода акт, при котором ни одно приложение не остановились в разработке из-за плохого процесса деплоя. Возможно, это была плохая аналогия, поскольку у них в Америке действительно паршивая система образования. Но я надеюсь, что в любом случае я высказал свою точку зрения.
 
-## 2.2 Maturity {#maturity}
+## 2.2 Зрелость {#maturity}
 
-During your application's lifetime the deployment process will (hopefully and most likely) mature. That it matures is usually a good thing and somewhere along the line someone will probably realize that steps need to be taken to improve it. In which ways it will mature is usually according to the following but maybe not in this particular order:
+В течение срока жизни вашего приложения процесс деплоя, я надеюсь, скорее всего, будет зрелым. То, что он созревает, обычно хорошо, и где-то в процессе работы кто-то, вероятно, поймёт, что нужно предпринять шаги для улучшения приложения. Каким образом он будет созревать, как правило, происходит в соответствии со следующим списком, но может быть не в строго таком порядке:
 
-* Documentation
-* Automation
-* Verification
-* Notification
-* Tests
-* Tools
-* Monitoring
+* Документация
+* Автоматизация
+* Проверка
+* Уведомление
+* Тесты
+* Инструменты
+* Мониторинг
 
-**Documentation**. This is usually what happens when the transition is made from one person deploying to multiple people deploying. It will be a natural step, since the deployment process will most likely have manual steps so you can't deploy without documentation. Somewhere a document or something similar will end up describing the different steps that need to be done in order to deploy.
+**Документация**. Обычно это происходит, когда осуществляется переход от одного человека, который делал деплой к нескольким другим, которые будут деплоить. Это будет естественный шаг, так как процесс деплоя, скорее всего, будет иметь ручные шаги, поэтому вы не сможете развернуть без документации. Где-то документ или что-то подобное в конечном итоге будет описывать различные шаги, которые необходимо выполнить для деплоя.
 
-**Automation**. Multiple people are not deploying, but stuff breaks because of inconsistency. Even if all manual steps are documented well, unexpected things will occur that fall outside the scope of the documentation. In these cases it will end up on the one woman/man deploy army since they will have the answers. The response and solution to this is automation. It should be a humble effort to, in the end, automate everything in the process.
+**Автоматизация**. Несколько людей не деплоят, однако документация устаревает из-за несоответствия. Даже если все шаги руководства хорошо документированы, произойдёт непредвиденное событие, выходящее за рамки документации. В таких случаях это закончится на армии деплоя, состоящей из мужчины/женщины, поскольку у них есть все ответы. Ответ и решение конкретно этой проблемы — автоматизация. Это должно быть скромное усилие, чтобы, в конце концов, автоматизировать все в этом процессе.
 
-**Verification**. The process has now been automated enough to make anyone able to deploy in a consistent manner. But still it can break in numerous ways and the automation will be altered to handle errors so we can verify that the steps are completed without errors. The deployment can be aborted if any automation fails and display an appropriate message to the person deploying on what went wrong.
+**Проверка**. Теперь процесс деплоя достаточно автоматизирован, чтобы каждый мог деплоить в согласованном порядке. Но все ещё он может быть сломан самыми разными путями, поэтому автоматизация требует изменений с целью реализации обработки ошибок, чтобы мы могли убедиться, что этапы выполняются корректно. Деплой может быть прерван, если какой-либо шаг автоматизации завершится с ошибкой и отобразит соответствующее сообщение для человека, который разбирается, что произошло не так.
 
-**Notification**. With verification in place making it notify the right people when it fails should be trivial. Having a deploy fail silently could be catastrophic and deploying the wrong changes could also be very troublesome. A notification on what was deployed (branch, commit, etc) and that it did so successfully can be just as useful as for a failing one.
+**Уведомление**. С действующей проверкой деплоя обычно реализуют уведомление определённых людей при ошибке деплоя. Неудачный деплой может быть катастрофическим, и отправка на продакшен ошибочных изменений также может быть доставить большие неприятности. Уведомление о успешном процессе деплоя (ветви, коммита и т.д.) может принести такую же полезную информацию, как и при неудачном деплое.
 
-**Tools**. It seldom happens that a deployment process will use tools from the start. With a stable process that works in most cases but is difficult to extend, tools will most likely be put in place. Adding commands to run with a deployment tool is usually a lot easier than changing the scripted automation and will leave the scripts obsolete and replace them. It will often also replace the documentation part since it will more or less document itself, if done correctly.
+**Инструменты**. Редко бывает, что процесс деплоя будет использовать инструменты с самого начала. Стабильный процесс работает в большинстве случаев, однако его трудно расширить, поэтому инструменты, скорее всего, будут использоваться. Добавление команд для запуска с помощью инструмента деплоя, как правило, намного проще, чем изменение скрипта автоматизации, что оставит скрипты устаревшими и заменит их. Они также часто заменяют часть документации, поскольку более или менее документируют себя сами, если будут выполнены правильно.
 
-**Monitoring**. This is a step few will actually reach and is definitely more of a *nice to have* than a *need to have* maturity. It's about monitoring how the application and its environments responds to a deploy. The monitoring could monitor CPU usage, memory usage or I/O-operations. If a deploy increases memory usage by 30% you might have a big problem on your hands. So the goal here is to monitor and notify on big deviations for certain key metrics.
+**Мониторинг**. Это шаг, который на самом деле немногие достигнут и, безусловно, более *неплохо бы его иметь*, чем *обязательно он нужен*. Речь идёт о мониторинге того, как приложение и его окружения реагируют на деплой. Мониторинг может контролировать использование ЦП, использование памяти или операций ввода-вывода. Если деплой увеличивает использование памяти на 30%, у вас может возникнуть большая проблема. Таким образом, целью здесь является мониторинг и уведомление о больших отклонениях по определённым ключевым показателям.
 
-## 2.3 Agility
+## 2.3 Гибкость
 
-The world around us as software developers is getting more and more agile. I'm talking about the world of [agile software development](http://en.wikipedia.org/wiki/Agile_software_development), not the regular outside world where people drink lattes and worry about their mortgages. More and more companies are jumping on the agile bandwagon and for a good reason. There are some practices in this that are great, such as behaviour-driven development (BDD), test-driven development (TDD), pair programming, continuous integration, sprints, user stories and cross-functional teams just to name a few.
+Мир вокруг нас, как разработчиков программного обеспечения, становится все более гибким. Я говорю о мире [гибкой методологии разработки] (hhttps://ru.wikipedia.org/wiki/%D0%93%D0%B8%D0%B1%D0%BA%D0%B0%D1%8F_%D0%BC%D0%B5%D1%82%D0%BE%D0%B4%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F_%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8), а не о обычном внешнем мире, где люди пьют латте и беспокоятся о своих ипотечных кредитах. Все больше и больше компаний присоединяются к гибкой методологии и по достаточно веской причине. К гибкой методологии входят такие замечательные практики как разработка на основе поведения (BDD), разработка через тестирование (TDD), парное программирование, непрерывная интеграция, спринты, пользовательские истории и кросс-функциональные команды — и это не весь список.
 
-> Agile: "Characterized by quickness, lightness, and ease of movement; nimble."
+> Agile: "Характеризуется быстротой, мягкостью и лёгкостью движения; шустрый."
 
-This sums it up pretty well because you want your software development cycle to be fast, easy and adaptable where you work in small increments and respond quickly to feedback through iteration. At the beginning of 2001, a bunch of very smart people got together to talk about lightweight development methods and what they ultimately came up with was the publication [Manifesto for Agile Software Development](http://agilemanifesto.org/), this is the main part of it:
+Это очень хорошо, потому что вы хотите, чтобы ваш цикл разработки программного обеспечения был быстрым, лёгким и адаптируемым, где вы работаете с небольшим шагом и быстро реагируете на обратную связь через итерацию. В начале 2001 года группа очень умных людей собралась вместе, чтобы поговорить о методах лёгкой разработки, и в конечном итоге они пришли к публикации [Agile-манифеста разработки программного обеспечения](http://agilemanifesto.org/iso/ru/manifesto.html), вот основная его часть:
 
-> We are uncovering better ways of developing software by doing it and helping others do it. Through this work we have come to value:
+> Мы постоянно открываем для себя более совершенные методы разработки программного обеспечения, занимаясь разработкой непосредственно и помогая в этом другим. Благодаря проделанной работе мы смогли осознать, что:
 
-> **Individuals and interactions** over Processes and tools
+> **Люди и взаимодействие** важнее процессов и инструментов
 >
-> **Working software** over Comprehensive documentation
+> **Работающий продукт** важнее исчерпывающей документации
 >
-> **Customer collaboration** over Contract negotiation
+> **Сотрудничество с заказчиком** важнее согласования условий контракта
 >
-> **Responding to change** over Following a plan
+> **Готовность к изменениям** важнее следования первоначальному плану
 >
-> That is, while there is value in the items on the right, we value the items on the left more.
+> То есть, не отрицая важности того, что справа, мы всё-таки больше ценим то, что слева.
 >
-> *Kent Beck, James Grenning, Robert C. Martin, Mike Beedle, Jim Highsmith, Steve Mellor, Arie van Bennekum, Andrew Hunt, Ken Schwaber, Alistair Cockburn, Ron Jeffries, Jeff Sutherland, Ward Cunningham, Jon Kern, Dave Thomas, Martin Fowler, Brian Marick © 2001, the above authors. This declaration may be freely copied in any form, but only in its entirety through this notice.*
+> *Kent Beck, James Grenning, Robert C. Martin, Mike Beedle, Jim Highsmith, Steve Mellor, Arie van Bennekum, Andrew Hunt, Ken Schwaber, Alistair Cockburn, Ron Jeffries, Jeff Sutherland, Ward Cunningham, Jon Kern, Dave Thomas, Martin Fowler, Brian Marick © 2001, вышеперечисленные авторы. Текст манифеста может свободно копироваться в любой форме, но только полностью, включая это уведомление.*
 
-This is really exciting stuff and if you take a look at what is valued in the items on the left it's people, flexibility and speed. Flexibility and speed of the actual development and people is both about the people building the software and the people using the software.
+Это действительно весьма интересно, и если вы посмотрите на то, что ценится то, что слева — это люди, гибкость и скорость. Гибкость и скорость фактической разработки и людей связана как с людьми, создающими программное обеспечение, так и с людьми, использующими программное обеспечение.
 
-Now you might say that I have been talking about the deployment **process** a lot and the manifesto clearly states that it favours individuals and interactions over processes and tools. Yes, this is true; however it also states that there is value in the items on the right and I consider the deployment process to be essential in supporting a true agile development process. The core in agility for software development is iteration, an ability to adapt quickly and respond to feedback from people. How will you be able to do this efficiently without a good deployment process? If you iterate over a feature and spend two hours on it and then have to spend two hours deploying it, is that really agile? I would argue no. Even if the deploy takes "only" 30 minutes you need confidence in it and if there are many manual steps or you can't do a quick and easy rollback, what is agile about it then?
+Теперь вы можете сказать, что я много говорил о **процессе** деплоя, и в манифесте чётко говорится, что он отдаёт предпочтение людям и взаимодействиям, а не процессам и инструментам. Да, это правда; однако в нем также указывается, что в позициях справа есть своя ценность, и я считаю, что процесс деплоя необходим для поддержки реального гибкого процесса разработки. Основой гибкости разработки программного обеспечения является итерация, способность быстро адаптироваться и реагировать на отзывы людей. Как вы сможете сделать это эффективно без хорошего процесса деплоя? Если вы последовательно создаёте функционал и тратите на это два часа, а затем тратите два часа на её деплой, это разве гибко? Я бы сказал, нет. Даже если деплой занимает «всего» 30 минут, вам нужна уверенность в нём, и если есть много ручных шагов или вы не можете сделать быстрый и лёгкий откат, это то, о чём говорит agile?
 
-## 2.4 Plan for a marathon
+## 2.4 План марафона
 
-What could be better in all this than doing a comparison with a marathon? In an agile world you work in sprints and if you plan your deployment process for the current sprint your plan will be very short sighted and situational. If you expect your application to live longer than for a few sprints you need a plan for its future. So plan for a marathon, not a short sprint.
+Что может быть лучше во всем этом, чем сравнение с марафоном? В мире agile вы работаете спринтами, и если вы планируете процесс деплоя для текущего спринта, ваш план будет очень недальновидным и ситуативным. Если вы ожидаете, что ваше приложение будет жить дольше, чем несколько спринтов, вам необходим план на будущее. Так что планируйте марафон, а не короткий спринт.
 
-Making estimations is just as hard whether you make it for your development time or your application's future. This is especially true in the agile world where adapting quickly to feedback could change the direction of that future in a heartbeat. But we should at least try to do this. Try to make some predictions about where your application could end up. Coming up with a few scenarios that could occur will not harm you.
+Выполнение оценок так же сложно, независимо от того, делаете ли вы это для своего времени разработки или будущего вашего приложения. Это особенно верно в мире agile, где быстрая адаптация к обратной связи может изменить направление такого будущего в одно мгновение. Но нам нужно, по крайней мере, хотя бы попытаться это сделать. Попробуйте представить, где ваше приложение может оказаться. Придумав нескольких сценариев, которые могут произойти, не повредит вам.
 
-Say you deploy your application to a VPS with limited resources and no real options to scale it quickly. If you predict there is a possibility your application would get featured on Hacker News, Reddit, Product Hunt or Slashdot and the traffic goes through the roof, now what? Do you have a deployment process that is good enough for quickly moving your application to a new hosting provider? Does your application and deployment process support running on multiple nodes? Just to be clear, I'm not saying you should make your deployment process deal with all the possible scenarios since that would be extremely time inefficient. What I'm saying is that you should keep those scenarios in the back of your head while you plan and implement with a "if X happens, I can change this easily to fit it"-mentality. Your deployment process should be agile too and try to make it so you can change things fast and easy.
+Скажем, вы деплоите своё приложение на VPS с ограниченными ресурсами и не имеете реальных возможностей быстро масштабировать его. Есть вероятность, что ваше приложение будет упомянуто на Hacker News, Reddit, Product Hunt или Slashdot, из-за чего трафик взлетит до небес, и что потом? Имеется ли у вас процесс деплоя, который достаточно хорош для быстрого перемещения вашего приложения на новый хостинг-провайдер? Поддерживает ли приложение и процесс деплоя выполнение на нескольких узлах? Просто чтобы внести ясность, я не говорю, что вам нужно при создании процесса деплоя учитывать всевозможные сценарии, поскольку это будет крайне неэффективно. Я говорю, что вам стоило бы держать такие сценарии в голове, пока вы планируете и реализуете с подобным мышлением «если произойдёт X, могу ли я легко изменить его, чтобы адаптироваться ему». Процесс деплоя также должен быть гибким, чтобы можно было быстро и легко вносить изменения.
 
-## 2.5 Release cycles
+## 2.5 Циклы релизов
 
-You can write how much code you like, but if you're not shipping any of it you're not contributing with any value. You and your team should have a goal of how often you want to release code. Whether it be once every month or four times a day, as long as you have a goal and a plan for it. If you do not have a goal for it you can't reach something. So set a goal if you do not have one and try to get there. Knowing your current and your wanted release cycle is important for planning your deployment process.
+Вы можете написать, сколько кода вам нравится, но если он не будет выпущен, то в нём нет никакой ценности. Вы и ваша команда должна должны быть нацелены на то, как часто вы хотите отправлять код в продакшен. Будь то один раз в месяц или четыре раза в день, если у вас есть цель и план для этого. Если у вас нет цели, вы не можете достичь чего-то. Поэтому поставьте цель, если у вас её нет, и попытайтесь достичь её. Знание текущего и желаемого цикла релизов важно для планирования вашего процесса деплоя.
 
-I> By "shipping code" I refer to deploying it, from finishing a feature in your local environment to getting it out to the production server(s).
+I> Под «выпущен» относительно кода я имею в виду его деплой — от завершения работы над определённым функционалом в локальной окружении до его отправки на продакшен-сервер.
 
-There are a few ways in which we ship code and the different models of it can be summed up to:
+Есть несколько способов, с помощью которых мы отправляем код, и различные его модели можно суммировать следующим образом:
 
-* I'm done, ship it.
-* The new version is done, ship it.
-* X amount of time has passed, ship it.
-* I pushed it, ship it.
+* Я закончил, можно деплоить.
+* Новая версия сделана, можно деплоить.
+* X времени прошло, можно деплоить.
+* Я отправил изменения в репозиторий, можно деплоить.
 
-This is of course simplified and there are many variants of these out there in the wild. But let's discuss these individually to see what they're about.
+Это, конечно, упрощено, и на практике многие из этих вариантов используются. Но давайте обсудим каждый из них по отдельности, чтобы узнать, что он представляет из себя.
 
-**I'm done, ship it**. We could call this *feature deploy* or *shotgun deploy* depending on how we feel about it. This is a typical model for when there is one or few developers for an application. It's an ad-hoc type of deploy and when you have finished and tested your feature you deploy it. I think this is a very underestimated type of deploy if you can make sure that you do not push changes someone else has made. Why should we wait for a ritualistic deploy? If you version control with a good branching strategy these types of ad-hoc deploys are definitely possible. For larger teams and applications this is something I wouldn't recommend though.
+**Я закончил, можно деплоить.**. Мы могли бы назвать это *деплой функционала* или *вынужденный деплой* в зависимости от того, как мы к этому относимся. Это типичная модель, когда есть один или несколько разработчиков приложения. Это ситуативный тип деплоя, когда вы закончили и протестировали свой функционал, который вы теперь деплоите. Я думаю, что это очень недооценённый тип деплоя, если вы можете быть уверенным в том, что не отправляете изменения, сделанные кем-то другим. Почему мы должны ждать ритуального деплоя? Если вы контролируете версию с хорошей стратегией ветвления, подобные несистематические типы деплоя, безусловно, возможны. Для более крупных команд и приложений я бы не рекомендовал так делать.
 
-**The new version is done, ship it**. This would be when your software has reached a new version, either minor or major. The point here is that the deploy payload will probably be large and the development has been undergoing for a considerable amount of time. I would avoid this model like the plague when it comes to web applications. One of the great advantages of web applications is the ability to change the application quickly without having to go through build steps and knowing your users have updated their applications. On the web you ship your code and then your user doesn't have a choice. Why even deploy only after a minor version is completed? If you are doing this, one of the reasons could be that the deployment process is to complex. Fix it and stop pushing like this.
+**Новая версия сделана, можно деплоить**. Это произойдёт, когда ваше приложение будет готово для новой версии, как незначительной, так большой. Смысл здесь в том, что кода для деплоя, вероятно, будет много, поскольку разработка версии проходит в течение значительного периода времени. Я бы избегал такой модели деплоя, как чумы, когда это касается веб-приложений. Одним из больших преимуществ веб-приложений — это возможность быстро его изменять, не выполняя шаги сборки и зная, что ваши пользователи получат приложение с обновлённым кодом. В интернете вы отправляете свой код, после чего у вашего пользователя нет выбора, использовать прежнюю версию приложения или только что отправленную с новыми изменениями. Зачем вообще делать деплой только после готовности небольшой версии? Если у вас это так, то одна из причин этого может заключаться в том, что процесс деплоя сложный. Исправьте и прекратите отправлять изменения подобным образом.
 
-**X amount of time has passed, ship it**. If your team is working in sprints this is probably how you deploy. Whenever a sprint is complete you deploy. The amount of time between deploys can vary depending on how long sprints you have of course and the main take here is that deploys happen on a recurring time, for example every other week on Mondays. I do not mind this model for deployment at all if you have reasonable sprint durations. If you have three month sprints it could be bad and should take a look at why you're doing this. But if you have sprints of perhaps 1-2 weeks, go for it.
+**X времени прошло, можно деплоить**. Если ваша команда работает спринтами, вероятно, таким образом вы деплоите. Всякий раз, когда спринт завершён, вы делаете деплой. Количество времени между деплоем может варьироваться в зависимости от того, какие долгие у вас спринты, конечно, и основное внимание здесь заключается в том, что развёртывание происходит периодически, например каждую неделю по понедельникам. В принципе я не против такой модели деплоя, при условии, что у вас разумные продолжительности спринта. Если у вас скрипт длится три месяца, это может быть плохо, и вам нужно посмотреть, почему вы именно так решили делать. Но если у вас есть спринт, возможно, продолжительностью в 1-2 недели, попробуйте так деплоить.
 
-**I pushed it, ship it**. Also known as *continuos deployment*. Ah, the unicorn of deploys. Here everything is deployed when one or more commits are pushed to a location. This is done through (at least should be) a very complex system of automation with testing and monitoring. The topic of how you can accomplish this is not an easy one and I will not try to explain it here.
+**Я отправил изменения в репозиторий, можно деплоить**. Также известен как *непрерывный деплой (continuous deployment)*. Ах, единорог разворачивается. Происходит деплой, когда один или несколько коммитов отправляются в репозиторий. Это достигается путём (по крайней мере, так должно быть) очень сложной системой автоматизации с тестированием и мониторингом. Эта тема, как вы можете это сделать, непростая, и я не буду здесь её объяснять.
 
-One important point to make here is that being able to continuously deploy is living the dream. Very few will have time, knowledge and patience to set up a complete process of continuos deploys. However it's something that we can strive for even if you do not want to continuos deploy. Building a culture, environment and process where it's possible will benefit you tremendously. Having the correct tools in place for automation, monitoring, etc will never be a bad thing. If you could have it all and just flip off the switch that deploys everything automatically, you should have a sense of bliss and serenity. You've done it.
+Один важный момент в возможности постоянного деплоя — это жизнь, а не мечта. У очень немногих будет время, знания и терпение для создания полного процесса непрерывного деплоя. Однако это то, к чему мы можем стремиться, даже если вы не хотите непрерывного деплоя. Построение культуры, среды и процесса, где это возможно, принесёт вам огромную пользу. Наличие правильных инструментов для автоматизации, мониторинга и т.д. — никогда не повредит. Если бы у вас было все это и вы просто отключили переключатель, который автоматически всё деплоит, у вас должно быть было бы ощущение блаженства и спокойствия. У вас получилось.
 
-## 2.6 Technical debt and rot
+## 2.6 Технический долг и деградация ПО
 
-Technical debt and software rot is something well known and talked about in the developer community, but the concepts can be applied to more than code. We should take care of our deployment just as much as our code. When an ad-hoc deployment process is put in place we immediately start hoarding technical debt and when it starts to rot  we have **shipping rot**. The problem with this kind of debt and rot is that it's more than usually exponential and self enforcing. Have you heard of the [broken window theory](http://en.wikipedia.org/wiki/Broken_windows_theory)? The TL;DR version is: when people see that a building has a broken window, they stop caring less about maintaining it and into the spiral it goes. This applies perfectly to software development where legacy code stays legacy and bad code breeds more bad code. The same goes for our deployment process: a bad process will stay bad or get worse. If you can stop that first window from breaking or quickly repair it, everyone else will care for that it stays that way. Having goals set is a great tool for quickly dealing with that broken window and if you at some point realize that there are many broken windows, you should perhaps fix them all in one big swoop.
+Технический долг и программная деградация — это что-то хорошо известное и обсуждаемое в сообществе разработчиков, но эти концепции могут быть применены не только к коду. Мы должны позаботиться о нашем деплое так же, как и нашем коде. Когда бессистемный процесс деплоя будет создан, мы немедленно начинаем накапливать технический долг, а когда он начинает разлагаться, у появляется **доставка испорченного кода (shipping rot)**. Проблема с этим видом долга заключается в том, что он больше, чем обычно, экспоненциальный и самодостаточный. Вы слышали о [теории разбитых окон](https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D0%BE%D1%80%D0%B8%D1%8F_%D1%80%D0%B0%D0%B7%D0%B1%D0%B8%D1%82%D1%8B%D1%85_%D0%BE%D0%BA%D0%BE%D0%BD)? Краткий пересказ, для тех, кто не в курсе: когда люди видят, что у здания есть разбитое окно, они перестают меньше заботиться о его сохранности и втягиваются по спирали, т.е. разбивают другие окна! Это отлично применимо и к разработке программного обеспечения, где устаревший код остаётся устаревшим и кодом с ошибками, и порождает больше плохого кода. То же самое касается нашего процесса деплоя: плохой процесс останется плохим или он со временем ухудшится. Если вы можете остановить это самое первое окно от повреждения или быстро его заменить на новое, все остальные будут заботиться о том, чтобы он оставался таким же целым. Имея определённые цели — это отличный инструмент для быстрого решения проблемы с этим разбитым окном, и если вы в какой-то момент увидите много разбитых окон, вам, возможно, стоит восстановить их все одним большим махом.
 
-## 2.7 The list {#goals-list}
+## 2.7 Список целей {#goals-list}
 
-We can condense the goals in to a bullet list since everybody likes a clear and concise list, right? When reading the list, try to reflect on where you currently are at the different goals.
+Мы можем сформировать цели в ненумерованном списке, поскольку всем нравится чёткий и краткий список, не так ли? При чтении списка попробуйте задуматься о том, где вы сейчас находитесь в разных целях.
 
-* Automated
-* Responsive
-* Atomic
-* Reversible
-* Simple
-* Fast
-* Agnostic
+* Автоматизированный
+* Отзывчивый
+* Атомарный
+* Обратимый
+* Простой
+* Быстрый
+* Независимый
 
-**Automated**. Have you read the first chapter? If not, do it. Not having an automated process is the root of all evil.
+**Автоматизированный**. Вы прочитали первую главу? Если нет, сделайте это. Отсутствие автоматизированного процесса — это корень всего зла.
 
-**Responsive**. A good deployment process responds to what is happening. If an error occurs somewhere it should abort and notify you or the appropriate people somehow. Having steps fail silently in a chain can be very destructive for your application.
+**Отзывчивый**. Хороший процесс деплоя отвечает тому, что происходит. Если где-то происходит ошибка, она должна прервать процесс деплоя и уведомить вас или нужных людей. Тихое выполнение шагов в цепочке может быть очень разрушительным для вашего приложения.
 
-**Atomic**. Nothing in your deploy should be able to break your application and you should comply with the concept of completing a build before serving it to any user. The transition between the previous and the new build should be as close to instant as possible.
+**Атомарный**. Ничто при деплое не должно нарушить работу вашего приложения, и вам следует соблюдать концепцию завершения сборки перед тем, как приложение будет использоваться конечным пользователем. Переход между предыдущей и новой сборкой приложения должен быть максимально быстрым.
 
-**Simple**. Everyone should understand it and use it. Everyone should feel confident and comfortable with it. This is true for deploying, making changes or extending the process.
+**Простой**. Каждый должен понимать процесс деплоя и использовать его. Каждый должен чувствовать себя уверенно и комфортно с ним. Это касается и деплоя, внесения изменений или расширения процесса.
 
-**Reversible**. Because it sounds better than "rollbackable". Being able to roll back is just as important as deploying your changes and this reverse process should also follow the list of goals.
+**Обратимый**. Потому что это звучит лучше, чем «возможность откатить изменения». Возможность отката так же важна, как и деплой ваших изменений, и этот обратимый процесс также должен соответствовать списку целей.
 
-**Fast**. You want it to be fast because speed is key in being able to deploy often. Fast rollbacks combined with fast deploys is another key which spells confidence. If something breaks you can easily go back and fix things without that stress knowing production is in a broken state.
+**Быстрый**. Вы хотите, чтобы он был быстрым, потому что скорость — это ключ к возможности часто деплоить. Быстрые откаты в сочетании с быстрыми деплоями — ещё один главный аспект, который говорит о доверии. Если что-то ломается, вы можете легко откатиться и исправить ситуацию без того напряжения, зная, что продакшен находится в неисправном состоянии.
 
-**Agnostic**. Building a deployment process that is dependent on its environment could be devastating. Being able to only deploy to Amazon Web Services for example will be great until you want to switch provider. The application should happily be deployed anywhere and it should also be agnostic about who or what is deploying.
+**Независимый**. Создание процесса деплоя, зависящего от его окружения, может быть разрушительным. Например, возможность деплоя только на Amazon Web Services будет отличной, пока вы не захотите сменить провайдера. Приложение должно быть успешно развёрнуто в любом месте, и его не должно волновать, кто или что делает деплой.
